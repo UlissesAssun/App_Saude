@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# SQLite database and local data
+*.db
+instance/
+
+# Test/coverage/cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build outputs
+build/
+dist/
+
+# Logs
+*.log
+
+# Node or other tooling (if any)
+node_modules/

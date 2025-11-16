@@ -1,0 +1,65 @@
+/* Estilos para página de listagem de pacientes */
+
+.table-container {
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.data-table {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-header {
+    background-color: #667eea;
+    color: white;
+}
+
+.table-header-cell {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.table-body-cell {
+    padding: 1rem;
+}
+
+.table-row {
+    border-bottom: 1px solid #eee;
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.table-row:hover {
+    background-color: #f9f9f9;
+}
+
+.table-link {
+    color: #667eea;
+    text-decoration: none;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.table-link:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .data-table {
+        font-size: 0.9rem;
+    }
+
+    .table-header-cell,
+    .table-body-cell {
+        padding: 0.7rem;
+    }
+}

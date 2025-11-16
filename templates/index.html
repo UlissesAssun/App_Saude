@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+    Página inicial (Home)
+    - Exibe navbar com navegação para as principais rotas
+    - Mostra cards de atalho para cada funcionalidade
+    - Usa estilos de base e específicos da página
+-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de IMC e Taxa Metabólica Basal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    
+</head>
+<body>
+    <!-- Navbar: menu superior com links para páginas CRUD -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('cadastrar') }}">📝 Cadastrar Paciente</a></li>
+            <li><a href="{{ url_for('listar') }}">📋 Listar Pacientes</a></li>
+            <li><a href="{{ url_for('visualizar') }}">👁️ Visualizar Paciente</a></li>
+            <li><a href="{{ url_for('deletar') }}">🗑️ Deletar Paciente</a></li>
+            <li><a href="{{ url_for('atualizar') }}">✏️ Atualizar Paciente</a></li>
+        </ul>
+    </nav>
+
+    <!-- Container principal com card de boas-vindas e atalhos -->
+    <div class="container">
+        <div class="welcome-card">
+            <div class="icon">💪</div>
+            <h1>Bem-vindo!</h1>
+            <p>Seja bem-vindo ao calculador de IMC e Taxa Metabólica Basal!</p>
+
+            <div class="features">
+                    <!-- Cada link abaixo leva para uma funcionalidade específica -->
+                    <a href="{{ url_for('cadastrar') }}" class="feature">
+                    <h3>📝 Cadastro</h3>
+                    <p>Registre novos pacientes no sistema</p>
+                </a>
+                <a href="{{ url_for('listar') }}" class="feature">
+                    <h3>📋 Listar</h3>
+                    <p>Visualize todos os pacientes</p>
+                </a>
+                <a href="{{ url_for('visualizar') }}" class="feature">
+                    <h3>👁️ Visualizar</h3>
+                    <p>Visualize dados de um paciente</p>
+                </a>
+                <a href="{{ url_for('deletar') }}" class="feature">
+                    <h3>🗑️ Deletar</h3>
+                    <p>Remova pacientes do sistema</p>
+                </a>
+                <a href="{{ url_for('atualizar') }}" class="feature">
+                    <h3>✏️ Atualizar</h3>
+                    <p>Atualize informações de pacientes</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

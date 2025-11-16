@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+    Página de cadastro de paciente
+    - Formulário envia dados via JS (createPatient) para a API
+    - Campos: nome, data de nascimento, gênero, altura, peso
+    - Validações básicas por HTML (required, min/max) e complementadas no backend
+-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Paciente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+</head>
+<body>
+    <!-- Navbar: navegação entre as páginas da aplicação -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">🏠 Início</a></li>
+            <li><a href="{{ url_for('cadastrar') }}">📝 Cadastrar Paciente</a></li>
+            <li><a href="{{ url_for('listar') }}">📋 Listar Pacientes</a></li>
+            <li><a href="{{ url_for('visualizar') }}">👁️ Visualizar Paciente</a></li>
+            <li><a href="{{ url_for('deletar') }}">🗑️ Deletar Paciente</a></li>
+            <li><a href="{{ url_for('atualizar') }}">✏️ Atualizar Paciente</a></li>
+        </ul>
+    </nav>
+
+    <!-- Container principal com card e formulário de cadastro -->
+    <div class="container">
+        <div class="welcome-card">
+            <h1>📝 Cadastrar Paciente</h1>
+            <p>Preencha os dados abaixo para cadastrar um novo paciente</p>
+            
+            <div class="form-container">
+                <!-- O evento onsubmit chama a função JS createPatient -->
+                <form onsubmit="createPatient(event)">
+                    <div class="form-group">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" id="nome" name="nome" class="form-input" required minlength="3" maxlength="100" placeholder="Digite seu nome completo">
+                        <small class="form-hint">Mínimo 3 caracteres, máximo 100</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" class="form-input" required>
+                        <small class="form-hint">Idade entre 18 e 120 anos</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genero" class="form-label">Gênero Biológico:</label>
+                        <select id="genero" name="genero" class="form-select" required>
+                            <option value="">Selecione uma opção</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="altura" class="form-label">Altura (m):</label>
+                        <input type="number" id="altura" name="altura" class="form-input" step="0.01" min="0.63" max="2.51" required placeholder="1.80">
+                        <small class="form-hint">Entre 0.63m e 2.51m</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="peso" class="form-label">Peso (kg):</label>
+                        <input type="number" id="peso" name="peso" class="form-input" step="0.1" min="6" max="635" required placeholder="65.5">
+                        <small class="form-hint">Entre 6kg e 635kg</small>
+                    </div>
+
+                    <!-- Botão de envio do formulário -->
+                    <button type="submit" class="form-button">Cadastrar Paciente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

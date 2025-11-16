@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+    Página de atualização de paciente
+    - Permite atualizar nome, altura, peso e gênero por ID
+    - Envia apenas campos preenchidos (payload parcial) via JS updatePatient
+-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Paciente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update.css') }}">
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+</head>
+<body>
+    <!-- Navbar: navegação entre telas -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">🏠 Início</a></li>
+            <li><a href="{{ url_for('cadastrar') }}">📝 Cadastrar Paciente</a></li>
+            <li><a href="{{ url_for('listar') }}">📋 Listar Pacientes</a></li>
+            <li><a href="{{ url_for('visualizar') }}">👁️ Visualizar Paciente</a></li>
+            <li><a href="{{ url_for('deletar') }}">🗑️ Deletar Paciente</a></li>
+            <li><a href="{{ url_for('atualizar') }}">✏️ Atualizar Paciente</a></li>
+        </ul>
+    </nav>
+
+    <!-- Container principal com formulário de atualização -->
+    <div class="container">
+        <div class="welcome-card">
+            <h1>✏️ Atualizar Paciente</h1>
+            <p>Preencha os dados para atualizar um paciente</p>
+            
+            <div class="form-container">
+                <!-- O submit chama a função JS updatePatient -->
+                <form onsubmit="updatePatient(event)">
+                    <div class="form-group">
+                        <label for="id_paciente" class="form-label">ID do Paciente:</label>
+                        <input type="number" id="id_paciente" name="id_paciente" class="form-input" required min="1" placeholder="Digite o ID">
+                        <small class="form-hint">ID obrigatório para identificar o paciente</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" id="nome" name="nome" class="form-input" minlength="3" maxlength="100" placeholder="Digite o novo nome">
+                        <small class="form-hint">Mínimo 3 caracteres, máximo 100</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="altura" class="form-label">Altura (m):</label>
+                        <input type="number" id="altura" name="altura" class="form-input" step="0.01" min="0.63" max="2.51" placeholder="1.80">
+                        <small class="form-hint">Entre 0.63m e 2.51m</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="peso" class="form-label">Peso (kg):</label>
+                        <input type="number" id="peso" name="peso" class="form-input" step="0.1" min="6" max="635" placeholder="65.5">
+                        <small class="form-hint">Entre 6kg e 635kg</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sexo" class="form-label">Gênero Biológico:</label>
+                        <select id="sexo" name="sexo" class="form-select">
+                            <option value="">Selecione uma opção</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                        </select>
+                    </div>
+
+
+
+                    <!-- Botão de envio da atualização -->
+                    <button type="submit" class="form-button">Atualizar Paciente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

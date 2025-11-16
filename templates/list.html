@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+    Página de listagem de pacientes
+    - Renderiza tabela com dados vindos do backend (Jinja2)
+    - Ação "Ver" usa JS para redirecionar à página de visualização com o ID
+-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Pacientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+</head>
+<body>
+    <!-- Navbar: navegação principal -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">🏠 Início</a></li>
+            <li><a href="{{ url_for('cadastrar') }}">📝 Cadastrar Paciente</a></li>
+            <li><a href="{{ url_for('listar') }}">📋 Listar Pacientes</a></li>
+            <li><a href="{{ url_for('visualizar') }}">👁️ Visualizar Paciente</a></li>
+            <li><a href="{{ url_for('deletar') }}">🗑️ Deletar Paciente</a></li>
+            <li><a href="{{ url_for('atualizar') }}">✏️ Atualizar Paciente</a></li>
+        </ul>
+    </nav>
+
+    <!-- Container principal com uma tabela de pacientes -->
+    <div class="container">
+        <div class="welcome-card">
+            <h1>📋 Listar Pacientes</h1>
+            <p>Visualize todos os pacientes cadastrados no sistema</p>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="table-header-cell">ID</th>
+                            <th class="table-header-cell">Nome</th>
+                            <th class="table-header-cell">Altura</th>
+                            <th class="table-header-cell">Peso</th>
+                            <th class="table-header-cell">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if patients %}
+                            {% for patient in patients %}
+                            <tr class="table-row">
+                                <td class="table-body-cell">{{ patient.id }}</td>
+                                <td class="table-body-cell">{{ patient.name }}</td>
+                                <td class="table-body-cell">{{ patient.height }}m</td>
+                                <td class="table-body-cell">{{ patient.weight }}kg</td>
+                                <td class="table-body-cell">
+                                    <!-- Link que aciona função JS para ir à página de visualização -->
+                                    <a href="#" onclick="goToViewPatient({{ patient.id }}); return false;" class="table-link">Ver</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr class="table-row">
+                                <td colspan="5" style="text-align: center; padding: 2rem; color: #999;">
+                                    Nenhum paciente cadastrado
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

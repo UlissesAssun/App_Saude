@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+    Página de exclusão de paciente
+    - Recebe um ID e aciona a função JS deletePatient
+    - A função busca o nome do paciente e mostra na confirmação
+-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Paciente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+</head>
+<body>
+    <!-- Navbar: opções de navegação -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">🏠 Início</a></li>
+            <li><a href="{{ url_for('cadastrar') }}">📝 Cadastrar Paciente</a></li>
+            <li><a href="{{ url_for('listar') }}">📋 Listar Pacientes</a></li>
+            <li><a href="{{ url_for('visualizar') }}">👁️ Visualizar Paciente</a></li>
+            <li><a href="{{ url_for('deletar') }}">🗑️ Deletar Paciente</a></li>
+            <li><a href="{{ url_for('atualizar') }}">✏️ Atualizar Paciente</a></li>
+        </ul>
+    </nav>
+
+    <!-- Container principal com formulário de deleção -->
+    <div class="container">
+        <div class="welcome-card">
+            <h1>🗑️ Deletar Paciente</h1>
+            <p>Digite o ID do paciente que deseja deletar</p>
+            
+            <div class="form-container">
+                <!-- Ao enviar, chama deletePatient que confirma com o nome do paciente -->
+                <form onsubmit="deletePatient(event)">
+                    <div class="form-group">
+                        <label for="id_paciente" class="form-label">ID do Paciente:</label>
+                        <input type="number" id="id_paciente" name="id_paciente" class="form-input" required min="1" placeholder="Digite o ID">
+                    </div>
+
+                    <button type="submit" class="form-button">Deletar Paciente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
