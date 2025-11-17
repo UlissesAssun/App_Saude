@@ -54,7 +54,7 @@
                                 <td class="table-body-cell">{{ patient.weight }}kg</td>
                                 <td class="table-body-cell">
                                     <!-- Link que aciona função JS para ir à página de visualização -->
-                                    <a href="#" onclick="goToViewPatient({{ patient.id }}); return false;" class="table-link">Ver</a>
+                                    <a href="#" onclick="goToViewPatient('{{ patient.id }}'); return false;" class="table-link">Ver</a>
                                 </td>
                             </tr>
                             {% endfor %}

@@ -7,7 +7,7 @@ Responsável por:
 - Realizar validações e cálculos auxiliares (idade, IMC, TMB)
 """
 
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify
 from main import app
 import sqlite3 as sq
 import traceback
