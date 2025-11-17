@@ -58,6 +58,11 @@ def api_create_patient():
     if not data.get('name') or len(data.get('name', '')) < 3 or len(data.get('name', '')) > 100:
         return jsonify({'success': False, 'error': 'Nome deve ter entre 3 e 100 caracteres'}), 400
     
+    # Valida que o nome contenha apenas letras e espaços
+    name_check = data.get('name', '').replace(' ', '')
+    if not name_check.isalpha():
+        return jsonify({'success': False, 'error': 'Nome deve conter apenas letras e espaços'}), 400
+    
     # Valida data de nascimento (YYYY-MM-DD) e faixa de idade
     try:
         birth_date_str = data.get('birth_date')
@@ -89,11 +94,14 @@ def api_create_patient():
         return jsonify({'success': False, 'error': 'Gênero deve ser M ou F'}), 400
     
     try:
+        # Normaliza o nome para title case (iniciais maiúsculas)
+        name_normalized = data['name'].strip().title()
+        
         # Insere o novo paciente no banco de dados
         with sq.connect(DB_PATH) as con:
             cur = con.cursor()
             cur.execute("""INSERT INTO patients (name, birth_date, height, weight, biological_gender)
-                VALUES (?, ?, ?, ?, ?)""", (data['name'], date_of_birth, height, weight, gender))
+                VALUES (?, ?, ?, ?, ?)""", (name_normalized, date_of_birth, height, weight, gender))
             con.commit()
         return jsonify({'success': True, 'message': 'Paciente criado com sucesso'}), 201
     except Exception as e:
@@ -102,6 +110,7 @@ def api_create_patient():
 @app.route("/api/paciente/<int:patient_id>", methods=['GET'])
 def api_get_patient(patient_id):
     """Retorna dados do paciente e cálculos derivados (idade, IMC, TMB)."""
+    
     try:
         with sq.connect(DB_PATH) as con:
             con.row_factory = sq.Row
@@ -161,6 +170,8 @@ def api_get_patient(patient_id):
 @app.route("/api/paciente/<int:patient_id>/deletar", methods=['DELETE'])
 def api_delete_patient(patient_id):
     """Remove um paciente pelo ID (se existir)."""
+    if patient_id <= 0:
+        return jsonify({'success': False, 'error': 'ID inválido'}), 400
     try:
         with sq.connect(DB_PATH) as con:
             cur = con.cursor()
@@ -178,6 +189,8 @@ def api_delete_patient(patient_id):
 @app.route("/api/paciente/<int:patient_id>/atualizar", methods=['PUT'])
 def api_update_patient(patient_id):
     """Atualiza campos permitidos do paciente (nome, altura, peso, gênero, data de nascimento)."""
+    if patient_id <= 0:
+        return jsonify({'success': False, 'error': 'ID inválido'}), 400
     data = request.get_json()
     
     try:
@@ -195,8 +208,12 @@ def api_update_patient(patient_id):
             if 'name' in data and data['name']:
                 if len(data['name']) < 3 or len(data['name']) > 100:
                     return jsonify({'success': False, 'error': 'Nome deve ter entre 3 e 100 caracteres'}), 400
+                # Valida que o nome contenha apenas letras e espaços
+                name_check = data['name'].replace(' ', '')
+                if not name_check.isalpha():
+                    return jsonify({'success': False, 'error': 'Nome deve conter apenas letras e espaços'}), 400
                 updates.append("name = ?")
-                params.append(data['name'])
+                params.append(data['name'].strip().title())
             
             # Atualiza altura, validando faixa e tipo
             if 'height' in data and data['height']:
