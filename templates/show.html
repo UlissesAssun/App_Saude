@@ -39,7 +39,7 @@
                 <form onsubmit="searchPatient(event)">
                     <div class="form-group">
                         <label for="id_paciente" class="form-label">ID do Paciente:</label>
-                        <input type="number" id="id_paciente" name="id_paciente" class="form-input" required placeholder="Digite o ID" value="{{ patient_id if patient_id else '' }}">
+                        <input type="number" id="id_paciente" name="id_paciente" class="form-input" required min ="0" required placeholder="Digite o ID" value="{{ patient_id if patient_id else '' }}">
                     </div>
 
                     <button type="submit" class="form-button">Buscar Paciente</button>
