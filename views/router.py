@@ -10,7 +10,6 @@ Responsável por:
 from flask import render_template, request, jsonify
 from main import app
 import sqlite3 as sq
-import traceback
 from datetime import datetime
 from models.database import DB_PATH
 from models.calculation import classification, calc_age, bmi_calc, basal_metabolic_rate
