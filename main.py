@@ -15,7 +15,7 @@ from clean import clean_pycache
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 # Importa as rotas após criar o app (evita import circular)
-from views.router import *  # noqa: F401,F403
+from views.router import * 
 
 def main():
     """Função principal: garante que a base esteja criada/atualizada."""
